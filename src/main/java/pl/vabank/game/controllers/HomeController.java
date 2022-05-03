@@ -10,13 +10,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import pl.vabank.game.access.RoomRepository;
 import pl.vabank.game.access.UserRepository;
+import pl.vabank.game.data.RoomData;
 import pl.vabank.game.data.UserData;
 
 @Controller
 public class HomeController {
     @Autowired
     private UserRepository userRepo;
+    @Autowired
+    private RoomRepository roomRepo;
 
     @GetMapping("")
     public String viewHomePage() {
@@ -47,5 +51,13 @@ public class HomeController {
         model.addAttribute("listUsers", listUsers);
 
         return "users";
+    }
+
+    @GetMapping("/rooms")
+    public String listRooms(Model model) {
+        List<RoomData> listRooms = roomRepo.findAll();
+        model.addAttribute("listRooms", listRooms);
+
+        return "rooms";
     }
 }

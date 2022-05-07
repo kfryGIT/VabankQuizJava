@@ -9,8 +9,24 @@ import javax.persistence.*;
 @Entity 
 public class QuestionsData {
     
+    public QuestionsData() {
+    }
+
+    public QuestionsData(Long id, String questionText, String answer1Text, String answer2Text, String answer3Text,
+            String answer4Text, String answerCorrect, String nameCategory, int priceCategory) {
+        this.id = id;
+        this.questionText = questionText;
+        this.answer1Text = answer1Text;
+        this.answer2Text = answer2Text;
+        this.answer3Text = answer3Text;
+        this.answer4Text = answer4Text;
+        this.answerCorrect = answerCorrect;
+        this.nameCategory = nameCategory;
+        this.priceCategory = priceCategory;
+    }
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)

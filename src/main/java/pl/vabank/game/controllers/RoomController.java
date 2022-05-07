@@ -83,6 +83,7 @@ public class RoomController {
             model.addAttribute("question23", room.getQuestion23());
             model.addAttribute("question24", room.getQuestion24());
             model.addAttribute("question25", room.getQuestion25());
+            model.addAttribute("room", room);
 
             return "game_room";
 

@@ -12,7 +12,7 @@ import pl.vabank.game.data.QuestionsData;
 //// This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
 //// CRUD refers Create, Read, Update, Delete
 
-public interface QuestionsRepository extends JpaRepository<QuestionsData, Integer>{
+public interface QuestionsRepository extends JpaRepository<QuestionsData, Long>{
  
 
 }

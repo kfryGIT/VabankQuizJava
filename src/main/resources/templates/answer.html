@@ -2,19 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="ISO-8859-1">
-    <title>Welcome to Java Vabank</title>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
     <div class="container text-center">
-        <h1>Welcome to Java Vabank</h1>
-        <h3><a th:href="@{/users}">List of Users</a></h3>
-        <h3><a th:href="@{/register}">Register</a></h3>
-        <h3><a th:href="@{/login}">Login</a></h3>
-        <h3><a th:href="@{/rooms}">List of Rooms</a></h3>
+        <h1 th:text="${message}"></h1>
     </div>
+
+    <h3><a th:href="@{/game_room/}+${roomid}">List of Questions</a></h3>
      
 </body>
 </html>

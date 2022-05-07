@@ -50,6 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/users").authenticated()
             .antMatchers("/rooms").authenticated()
             .antMatchers("/game_room/*").authenticated()
+            .antMatchers("/question/*/*").authenticated()
             .anyRequest().permitAll()
             .and()
             .formLogin()

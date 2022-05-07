@@ -15,6 +15,7 @@
                 Welcome <b>[[${#request.userPrincipal.principal.fullName}]]</b>
             </p>
             <input type="submit" value="Sign Out" />
+            <h3><a th:href="@{/create_room}">Create Room</a></h3>
         </form>
     </div>
     <div>
@@ -25,15 +26,17 @@
         <table class="table table-striped table-bordered">
             <thead class="thead-dark">
                 <tr>
-                    <th>Room ID</th>
-                    <th>Player 1</th>
+                    <th>Room</th>
+                    <th>Owner</th>
+                    <th>Action</th>
                     
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="room: ${listRooms}">
-                    <td th:text="${room.id}">Room ID</td>
-                    <td th:text="${room.player1}">Player 1</td>
+                    <td th:text="${room.id}">Room</td>
+                    <td th:text="${room.player1.fullName}">Owner</td>
+                    <td><a th:href="@{/room/${room.id}}">Join</a></td>
                    
                 </tr>
             </tbody>

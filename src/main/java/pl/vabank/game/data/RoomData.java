@@ -15,6 +15,14 @@ public class RoomData {
   public RoomData() {
   }
 
+  
+
+  public RoomData(Long id) {
+    this.id = id;
+  }
+
+
+
   public RoomData(Long id, int activRoom, int activRound, UserData player1, int player1Points, UserData player2,
       int player2Points, QuestionsData question1, QuestionsData question2, QuestionsData question3,
       QuestionsData question4, QuestionsData question5, QuestionsData question6, QuestionsData question7,
@@ -729,7 +737,6 @@ public class RoomData {
   public void setActiveQuestion25(int activeQuestion25) {
     this.activeQuestion25 = activeQuestion25;
   }
-
 
 
    

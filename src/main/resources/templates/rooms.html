@@ -36,7 +36,7 @@
                 <tr th:each="room: ${listRooms}">
                     <td th:text="${room.id}">Room</td>
                     <td th:text="${room.player1.fullName}">Owner</td>
-                    <td><a th:href="@{/room/${room.id}}">Join</a></td>
+                    <td><a th:href="@{/game_room/}+${room.id}">Join</a></td>
                    
                 </tr>
             </tbody>

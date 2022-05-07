@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Game Room</title>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container text-center">
+        <div>
+            <p>
+                <b>PUNKTACJA</b>
+            </p>
+        </div>
+        <div>
+            <h1>List of Questions</h1>
+        </div>
+
+        <div>
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Category 1</th>
+                        <th>Category 2</th>
+                        <th>Category 3</th>
+                        <th>Category 4</th>
+                        <th>Category 5</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td th:text="${question1.priceCategory}">quest</td>
+                        <td th:text="${question6.priceCategory}">E-mail</td>
+                        <td th:text="${question11.priceCategory}">First Name</td>
+                        <td th:text="${question16.priceCategory}">Last Name</td>
+                        <td th:text="${question21.priceCategory}">Last Name</td>
+                    </tr>
+                    <tr>
+                        <td th:text="${question2.priceCategory}">User ID</td>
+                        <td th:text="${question7.priceCategory}">E-mail</td>
+                        <td th:text="${question12.priceCategory}">First Name</td>
+                        <td th:text="${question17.priceCategory}">Last Name</td>
+                        <td th:text="${question22.priceCategory}">Last Name</td>
+                    </tr>
+                    <tr>
+                        <td th:text="${question3.priceCategory}">User ID</td>
+                        <td th:text="${question8.priceCategory}">E-mail</td>
+                        <td th:text="${question13.priceCategory}">First Name</td>
+                        <td th:text="${question18.priceCategory}">Last Name</td>
+                        <td th:text="${question23.priceCategory}">Last Name</td>
+                    </tr>
+                    <tr>
+                        <td th:text="${question4.priceCategory}">User ID</td>
+                        <td th:text="${question9.priceCategory}">E-mail</td>
+                        <td th:text="${question14.priceCategory}">First Name</td>
+                        <td th:text="${question19.priceCategory}">Last Name</td>
+                        <td th:text="${question24.priceCategory}">Last Name</td>
+                    </tr>
+                    <tr>
+                        <td th:text="${question5.priceCategory}">User ID</td>
+                        <td th:text="${question10.priceCategory}">E-mail</td>
+                        <td th:text="${question15.priceCategory}">First Name</td>
+                        <td th:text="${question20.priceCategory}">Last Name</td>
+                        <td th:text="${question25.priceCategory}">Last Name</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

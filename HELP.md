@@ -1,7 +1,10 @@
 # Getting Started
-Uruchomienie aplikacji następuje poprzez:
+Uruchomienie aplikacji następuje poprzez wpisanie w cmd w katalogu projektu game:
 
-java -jar target/game-0.0.1-SNAPSHOT.war
+    java -jar target/game-0.0.1-SNAPSHOT.war
+
+Następnie wpisujemy w przeglądarce adress: 
+    http://localhost:8080/
 
 ### Reference Documentation
 For further reference, please consider the following sections:

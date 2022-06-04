@@ -5,8 +5,15 @@
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <style>
+        #body1{margin-top: 100px;
+        margin-bottom: 100px;
+        background-image: linear-gradient(to right, orange, yellow);
+        text-align: center;
+        }
+    </style>
 </head>
-<body>
+<body id="body1">
     <div class="container text-center">
         <h1 th:text="${message}"></h1>
     </div>

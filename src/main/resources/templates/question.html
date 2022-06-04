@@ -7,12 +7,33 @@
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    <style>
+        #bod1 {
+            margin-top: 100px;
+            margin-bottom: 100px;
+            background-image: linear-gradient(to right, orange, yellow);
+            }
+        h1 {text-align: center;
+            text-transform: uppercase;
+            font-family:serif;
+            color: rgb(9, 16, 79)}
+        h2 {text-align: center;
+            color: rgb(2, 4, 21)}
+        p {text-align: center;
+            text-transform: uppercase;
+            font-family:serif;
+            color: rgb(13, 22, 104)}
+        a {
+        color: blue;
+        }
+    </style>
 </head>
 
-<body>
-    <div class="container text-center">
+<body id="bod1">
+    <div>
+    <!-- <div class="container text-center"> -->
         <h1>Pytanie</h1>
-        <h1 th:text="'Kategoria: ' + ${question.nameCategory}+ ' Nagorda: ' +${question.priceCategory}"></h1>
+        <h2 th:text="'Kategoria: ' + ${question.nameCategory}+ ' Nagroda: ' +${question.priceCategory}"></h2>
 
     </div>
     <div>
@@ -20,10 +41,13 @@
     </div>
 
     <div>
+        <p>
         <a th:text="${question.answer1Text}" th:href="@{/answer/}+${room.id}+'/'+${question.id}+'/1'"></a><br/>
+        <!-- $-blok kodu javowego które się wykonyje @-automatyzuje adres url to co wyświetla sie na góże str www -->
         <a th:text="${question.answer2Text}" th:href="@{/answer/}+${room.id}+'/'+${question.id}+'/2'"></a><br/>
         <a th:text="${question.answer3Text}" th:href="@{/answer/}+${room.id}+'/'+${question.id}+'/3'"></a><br/>
         <a th:text="${question.answer4Text}" th:href="@{/answer/}+${room.id}+'/'+${question.id}+'/4'"></a><br/>
+        </p>
     </div>
 </body>
 

@@ -263,12 +263,12 @@ public class GameApplication {
 				new QuestionsData(
 						// pyt4 -400
 						21L,
-						"xyz",
-						"aaa",
-						"bbb",
-						"ccc",
-						"ddd",
-						"aaa",
+						"metody element()i peek()…",
+						"zwracają i usuwają, ostatni element kolejki",
+						"zwracają, ale nie usuwają, ostatni element kolejki",
+						"zwracają i usuwają, pierwszy element kolejki",
+						"usuwają i zwracają pierwszy element kolejki, różnią się tylko zachowaniem, gdy kolejka jest pusta wówczas: remove()zwraca null, a poll()  zgłasza wyjątek",
+						"usuwają i zwracają pierwszy element kolejki, różnią się tylko zachowaniem, gdy kolejka jest pusta wówczas: remove()zwraca null, a poll()  zgłasza wyjątek",
 						"kolekcje mapy strumienie",
 						400),
 				new QuestionsData(

@@ -14,7 +14,11 @@ import pl.vabank.game.access.RoomRepository;
 import pl.vabank.game.data.QuestionsData;
 import pl.vabank.game.data.RoomData;
 import pl.vabank.game.data.UserData;
-
+/**
+ * 
+ * Opis klasu co tu sie dzieje 
+* @author Katarzyna Madalińska
+*/
 @Controller
 public class AnswerController {
 
@@ -24,6 +28,15 @@ public class AnswerController {
     @Autowired
     private RoomRepository roomRepo;
 
+
+    /**
+     * Jeśli uczestinik odpowie poprawnie przkedayzwana jest mesasge w zaleznosci ... -komentarze
+     * @param rid
+     * @param qid
+     * @param aid
+     * @param model
+     * @return
+     */
     @GetMapping("/answer/{rid}/{qid}/{aid}")
     public String answerQuestion(@PathVariable Long rid, @PathVariable Long qid, @PathVariable Long aid, Model model) {
 
@@ -57,9 +70,9 @@ public class AnswerController {
                     return "wrong_room";
                 }
                 if (room.getPlayer1() != null && room.getPlayer1().getId() == currentUser.getId()) {
-                   int newPoints= room.getPlayer1Points()+question.getPriceCategory();
-                   room.setPlayer1Points(newPoints);
-                   roomRepo.saveAndFlush(room);
+                   int newPoints= room.getPlayer1Points()+question.getPriceCategory();//pobiera aktualnych punktów usera i punktów za dane pytanie 
+                   room.setPlayer1Points(newPoints);//aktualizacja punktów
+                   roomRepo.saveAndFlush(room);//zapsywanie punktów w bazie
                 }
 
                 else if (room.getPlayer2() != null && room.getPlayer2().getId() == currentUser.getId()) {
@@ -75,7 +88,7 @@ public class AnswerController {
             model.addAttribute("roomid", rid);
             model.addAttribute("questionid", qid);
 
-        } catch (Exception e) {
+        } catch (Exception e) {//bląd logiczny w kodzie zabezpieczenie
             return "redirect:question/" + rid.toString() + '/' + qid.toString();
         }
 

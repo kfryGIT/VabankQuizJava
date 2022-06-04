@@ -1,6 +1,8 @@
 package pl.vabank.game.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
@@ -24,6 +26,17 @@ import pl.vabank.game.data.QuestionsData;
 import pl.vabank.game.data.RoomData;
 import pl.vabank.game.data.UserData;
 
+/**
+ * 
+ * Opis klasu co tu sie dzieje 
+ * @author Katarzyna Madalińska <br> 
+ *
+ * 
+ * 
+ *Cały moduł odpowiedzialny jest kolejno za <br> 
+ *- rejestracje użtowników showRegistrationForm <br>
+ *- login
+ */
 @Controller
 public class HomeController {
     @Autowired
@@ -67,11 +80,60 @@ public class HomeController {
     @GetMapping("/rooms")
     public String listRooms(Model model) {
         List<RoomData> listRooms = roomRepo.findAll();
+
+        Collections.sort(listRooms, new Comparator<RoomData>() {
+
+            public int compare(RoomData o1, RoomData o2) {
+                // compare two instance of `Score` and return `int` as result.
+                return o1.getId().compareTo(o2.getId());
+            }
+        });
+
+        // TODO dołączanie
+        // for(RoomData room: listRooms){
+
+        // if (room.getPlayer1() != null && room.getPlayer2() != null){
+
+        // }
+
+        // }
+        Boolean[] roomsStatus = new Boolean[listRooms.size()];
+        int roomIndex = 0;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); // osoba która
+
+        Object currentPrincipalObject = authentication.getPrincipal();// currentPrincipalObject-pobiera
+
+        UserData currentUser = ((CustomUserDetails) currentPrincipalObject).getUser();
+
+        for (RoomData room : listRooms) {
+            roomsStatus[roomIndex] = false;
+            if (currentUser.getId().equals(room.getPlayer1().getId())) {
+                
+                if((room.getActivRoom()&1)>0){
+                    roomsStatus[roomIndex] = true;
+                }
+            } else if (room.getPlayer2() != null && currentUser.getId().equals(room.getPlayer2().getId())) {
+                if((room.getActivRoom()&2)>0){
+                    roomsStatus[roomIndex] = true;
+                }
+            } else if (room.getPlayer2() == null) {
+                roomsStatus[roomIndex] = true;
+            }
+
+            roomIndex++;
+        }
+        model.addAttribute("roomsStatus", roomsStatus);
         model.addAttribute("listRooms", listRooms);
 
         return "rooms";
     }
-
+/**
+ * 
+ * 
+ * 
+ * @param model
+ * @return
+ */
     @GetMapping("/create_room")
     public String createRoom(Model model) {
 
@@ -126,11 +188,10 @@ public class HomeController {
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Object currentPrincipalObject = authentication.getPrincipal();
-        UserData currentUser = ((CustomUserDetails)currentPrincipalObject).getUser();
+        UserData currentUser = ((CustomUserDetails) currentPrincipalObject).getUser();
 
-        
-        RoomData newRoom = new RoomData(0L, 1, 1, currentUser, 0, null, 0, allQuestions);
-        
+        RoomData newRoom = new RoomData(0L, 3, 1, currentUser, 0, null, 0, allQuestions);
+
         roomRepo.save(newRoom);
 
         return "redirect:rooms";

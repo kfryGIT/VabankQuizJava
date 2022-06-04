@@ -31,7 +31,7 @@
             </p>
         </div>
         <div>
-            <h1>List of Questions</h1>
+            <h1>Lista pytań</h1>
         </div>
 
         <div id="t1">
@@ -85,6 +85,10 @@
                 </tbody>
             </table>
         </div>
+        <h3>Twoje room ID to :</h3>
+        <h3><a th:text="${room.id}"></a></h3>
+        <h3><a th:href="@{/rooms}">Przejdź do listy pokoi, aby zobaczyć podsumowanie gry</a></h3>
+        <h3><a th:href="@{/game_room_finish/}+${room.id}">Przejdź do listy pokoi, i zakończ grę</a></h3>
     </div>
 </body>
 

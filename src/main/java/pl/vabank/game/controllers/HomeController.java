@@ -46,11 +46,6 @@ public class HomeController {
     @Autowired
     private QuestionsRepository questRepo;
 
-    @GetMapping("")
-    public String viewHomePage() {
-        return "home";
-    }
-
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new UserData());

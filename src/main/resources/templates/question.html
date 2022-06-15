@@ -8,47 +8,153 @@
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
     <style>
-        #bod1 {
-            margin-top: 100px;
-            margin-bottom: 100px;
-            background-image: linear-gradient(to right, orange, yellow);
-            }
-        h1 {text-align: center;
-            text-transform: uppercase;
-            font-family:serif;
-            color: rgb(9, 16, 79)}
-        h2 {text-align: center;
-            color: rgb(2, 4, 21)}
-        p {text-align: center;
-            text-transform: uppercase;
-            font-family:serif;
-            color: rgb(13, 22, 104)}
-        a {
-        color: blue;
+        body {
+            background-image: url("https://img.freepik.com/free-photo/blue-steam-black-background_172251-548.jpg?w=740");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        #naglowek {
+            font-family: "Lucida Handwriting", "Brush Script MT", cursive;
+            font-weight: bold;
+            font-size: 36px;
+            color: white;
+            text-align: center;
+            padding-top: 15px;
+            padding-bottom: 10px;
+        }
+
+        #kwoty {
+            background-color: rgb(94, 182, 197);
+            color: white;
+        }
+
+        #kategoria,
+        #timmer {
+            background-color: rgb(53, 67, 70);
+            color: white;
+        }
+
+        table {
+            width: 950px;
+            text-align: center;
+            background-color: white;
+            border: 12px solid goldenrod;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .first {
+            width: 200px;
+            height: 75px;
+            color: green;
+            font-weight: bold;
+            background-color: black;
+            border: 15px solid DodgerBlue;
+            font-size: 25px;
+            font-weight: bold;
+            border-radius: 15px;
+        }
+
+        .second {
+            width: 125px;
+            background-image: linear-gradient(to right, DodgerBlue, rgb(2, 108, 183));
+            padding-bottom: 100px;
+            color: red;
+            font-weight: bold;
+            font-style: italic;
+            font-size: 40px;
+        }
+
+        .btn-primary {
+            background-color: grey !important;
+            width: 350px;
+            border-color: darkgray;
+            border-radius: 15px;
+            margin: 3px;
+        }
+
+        #player {
+            background-color: rgb(203, 105, 114);
+            color: white;
+            margin: 0px;
         }
     </style>
 </head>
 
-<body id="bod1">
-    <div>
-    <!-- <div class="container text-center"> -->
-        <h1>Pytanie</h1>
-        <h2 th:text="'Kategoria: ' + ${question.nameCategory}+ ' Nagroda: ' +${question.priceCategory}"></h2>
+<body>
+    <p id="naglowek"> Java Vabank</p>
 
-    </div>
-    <div>
-        <h1 th:text="${question.questionText}"></h1>
-    </div>
 
     <div>
-        <p>
-        <a th:text="${question.answer1Text}" th:href="@{/answer/}+${room.id}+'/'+${question.id}+'/1'"></a><br/>
-        <!-- $-blok kodu javowego które się wykonyje @-automatyzuje adres url to co wyświetla sie na góże str www -->
-        <a th:text="${question.answer2Text}" th:href="@{/answer/}+${room.id}+'/'+${question.id}+'/2'"></a><br/>
-        <a th:text="${question.answer3Text}" th:href="@{/answer/}+${room.id}+'/'+${question.id}+'/3'"></a><br/>
-        <a th:text="${question.answer4Text}" th:href="@{/answer/}+${room.id}+'/'+${question.id}+'/4'"></a><br/>
-        </p>
+            <!-- <div class="container text-center"> -->
+        <table>
+            <tr align="center">
+                <td rowspan="3" width="25%"> <br>
+                    <img src="https://pic.onlinewebfonts.com/svg/img_513928.png" width="150" height="105">
+                    <div class="first">
+                        <h5 th:text="${room.player1Points}"></h5>
+                    </div>
+                    <div class="second"> 1</div>
+                </td>
+                <td id="kwoty">
+                    <h5 th:text="'Nagroda: ' +${question.priceCategory}"></h5>
+                </td>
+                <td rowspan="3" width="25%"> <br>
+                    <img src="https://pic.onlinewebfonts.com/svg/img_513928.png" width="150" height="105">
+                    <div class="first">
+                        <h5 th:text="${room.player2Points}"></h5>
+                    </div>
+                    <div class="second">2</div>
+                </td>
+            </tr>
+            <tr>
+                <td id="kategoria">
+                    <h5 th:text="'Kategoria: ' + ${question.nameCategory}"></h5>
+                </td>
+            </tr>
+            <tr>
+                <td width="40%" style="background-color: rgb(209, 213, 217);">
+                    <h3 th:text="${question.questionText}" style="font-weight: bolder; font-style: italic;"></h3>
+                    <a th:text="${question.answer1Text}" th:href="@{/answer/}+${room.id}+'/'+${question.id}+'/1'"
+                        class="btn btn-primary"></a><br />
+                    <!-- $-blok kodu javowego które się wykonyje @-automatyzuje adres url to co wyświetla sie na górze str www -->
+                        <a th:text="${question.answer2Text}" th:href="@{/answer/}+${room.id}+'/'+${question.id}+'/2'"
+                        class="btn btn-primary"></a><br />
+                    <a th:text="${question.answer3Text}" th:href="@{/answer/}+${room.id}+'/'+${question.id}+'/3'"
+                        class="btn btn-primary"></a><br />
+                    <a th:text="${question.answer4Text}" th:href="@{/answer/}+${room.id}+'/'+${question.id}+'/4'"
+                        class="btn btn-primary"></a><br />
+                </td>
+            </tr>
+            <tr>
+                <td id=player>
+                    <h6 th:text="${room.player1.fullName}"> </h6>
+                </td>
+                <td id="timmer">
+                    Pozostało czasu do odpowiedzi: <span id="counter">5 </span>
+                </td>
+                <td id=player>
+                    <h6 th:text="${room.player2!=null? room.player2.fullName:' '}"> </h6>
+                </td>
+            </tr>
+        </table> 
     </div>
+
+    <script>
+        setInterval(function () {
+            var div = document.querySelector("#counter");
+            var count = div.textContent * 1 - 1;
+            div.textContent = count;
+            if (count <= 0) {
+                document.getElementById("counter").innerHTML = "0";
+                document.getElementById("timmer").innerHTML = "CZAS MINĄŁ!"
+                //window.location.replace('/game_room/'+"${room.id}");
+            }
+        }, 1000);
+    </script>
 </body>
 
 </html>

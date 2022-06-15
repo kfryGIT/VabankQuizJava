@@ -1,15 +1,76 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta charset="ISO-8859-1">
+    <meta charset="ISO-8859-1"/>
     <title>Registration Success</title>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <style>
+        body {
+            background-image: url("https://img.freepik.com/free-photo/blue-steam-black-background_172251-548.jpg?w=740");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        #naglowek {
+            font-family: "Lucida Handwriting", "Brush Script MT", cursive;
+            font-weight: bold;
+            font-size: 36px;
+            color: white;
+            text-align: center;
+            padding-top: 15px;
+            padding-bottom: 10px;
+        }
+
+        table {
+            width: 750px;
+            text-align: center;
+            background-color: white;
+            border: 12px solid goldenrod;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-primary {
+            background-color: grey !important;
+            width: 350px;
+            border-color: darkgray;
+            border-radius: 15px;
+            margin: 3px;
+        }
+
+        a:link {
+            text-decoration: none !important;
+        }
+    </style>
 </head>
+
 <body>
-    <div class="container text-center">
-        <h3>You have signed up successfully!</h3>
-        <h4><a th:href="@{/login}">Click here to Login</a></h4>
-    </div>
-     
+    <p id="naglowek"> Java Vabank</p>
+    <table>
+        <tr>
+            <th></th>
+        </tr>
+        <tr>
+            <td>
+                <div class="container text-center">
+                    <h3>You have signed up successfully!</h3>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a th:href="@{/login}" class="btn btn-primary">Click here to Login</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a th:href="@{/}" class="btn btn-primary">Wróć do strony głównej.</a>
+            </td>
+        </tr>
+        </div>
+    </table>
 </body>
+
 </html>

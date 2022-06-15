@@ -6,19 +6,70 @@
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
     <style>
-        #body1{margin-top: 100px;
-        margin-bottom: 100px;
-        background-image: linear-gradient(to right, orange, yellow);
-        text-align: center;
+        body {
+            background-image: url("https://img.freepik.com/free-photo/blue-steam-black-background_172251-548.jpg?w=740");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            font-family: 'Times New Roman', Times, serif;
         }
+
+        #naglowek {
+            font-family: "Lucida Handwriting", "Brush Script MT", cursive;
+            font-weight: bold;
+            font-size: 36px;
+            color: white;
+            text-align: center;
+            padding-top: 15px;
+            padding-bottom: 10px;
+        }
+
+        table {
+            width: 900px;
+            text-align: center;
+            background-color: white;
+            border: 12px solid goldenrod;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-primary {
+            background-color: grey !important;
+            width: 350px;
+            border-color: darkgray;
+            border-radius: 15px;
+            margin: 1px;
+        }
+
     </style>
 </head>
-<body id="body1">
-    <div class="container text-center">
-        <h1 th:text="${message}"></h1>
-    </div>
-
-    <h3><a th:href="@{/game_room/}+${roomid}">List of Questions</a></h3>
-     
+<body>
+    <p id="naglowek"> Java Vabank</p>
+    <table>
+        <tr><th>
+            <div class="container text-center">
+                <h1 th:text="${message}"></h1><br>
+                <hr>
+            </div>
+        </th></tr>
+        <tr><td id="timmer">
+            <br>
+            <h4>Przekierowanie nastąpi za <span id="counter"> 5 </span> sekund. Kliknij poniżej, aby przejść do listy pytań: </h4>
+            <br><a th:href="@{/game_room/}+${roomid}" class="btn btn-primary">List of Questions</a><br><br>
+        </td></tr>
+    </table>
+   
+    <script>
+        setInterval(function () {
+            var div = document.querySelector("#counter");
+            var count = div.textContent * 1 - 1;
+            div.textContent = count;
+            if (count <= 0) {
+                document.getElementById("counter").innerHTML = "0";
+                //window.location.replace('/game_room/'+"${room.id}");
+            }
+            
+        }, 1000);
+    </script>
 </body>
 </html>

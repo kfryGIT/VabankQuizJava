@@ -8,7 +8,7 @@ import java.util.Random;
 
 import org.javatuples.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+//import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.domain.Example;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,14 +28,16 @@ import pl.vabank.game.data.UserData;
 
 /**
  * 
- * Opis klasu co tu sie dzieje 
- * @author Katarzyna Madalińska <br> 
- *
- * 
- * 
- *Cały moduł odpowiedzialny jest kolejno za <br> 
- *- rejestracje użtowników showRegistrationForm <br>
- *- login
+ * Klasa HomeController odpowiedzialna jest za, <br> 
+ *- rejestracje użytkowników (metoda showRegistrationForm wyświetla formularz rejestracji użytkownika); <br>
+ *- metoda processRegister przetwarza rejestrację i zapisuje użytkownika w bazie, <br>
+ *- używamy BCryptPasswordEncoder do zakodowania hasła użytkownika, aby samo hasło nie było przechowywane w bazie, <br>
+ *- metoda listUsers zwraca widok.html "users" zawierający listą wszystkich użytkowników, utworzoną za pomocą metody findAll(),<br>
+ *- metoda listRooms zwraca widok.html "rooms" zawierający listą wszystkich pokoi, utworzoną za pomocą metody findAll(),<br>
+ *- lista pokoi jest posortowana, a pokoje mają określony status informujący, czy pokój jest aktywny;<br>
+ *- metoda createRoom tworzy kolejny pokój zawierający 25 wylosowanych pytań i zapisuje pokój w bazie;
+ 
+ * @author Katarzyna Madalińska
  */
 @Controller
 public class HomeController {
@@ -79,24 +81,17 @@ public class HomeController {
         Collections.sort(listRooms, new Comparator<RoomData>() {
 
             public int compare(RoomData o1, RoomData o2) {
-                // compare two instance of `Score` and return `int` as result.
+                
                 return o1.getId().compareTo(o2.getId());
             }
         });
 
-        // TODO dołączanie
-        // for(RoomData room: listRooms){
-
-        // if (room.getPlayer1() != null && room.getPlayer2() != null){
-
-        // }
-
-        // }
+       
         Boolean[] roomsStatus = new Boolean[listRooms.size()];
         int roomIndex = 0;
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); // osoba która
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); //tworzenie currentUser przez Authentication
 
-        Object currentPrincipalObject = authentication.getPrincipal();// currentPrincipalObject-pobiera
+        Object currentPrincipalObject = authentication.getPrincipal();
 
         UserData currentUser = ((CustomUserDetails) currentPrincipalObject).getUser();
 
@@ -122,13 +117,7 @@ public class HomeController {
 
         return "rooms";
     }
-/**
- * 
- * 
- * 
- * @param model
- * @return
- */
+
     @GetMapping("/create_room")
     public String createRoom(Model model) {
 

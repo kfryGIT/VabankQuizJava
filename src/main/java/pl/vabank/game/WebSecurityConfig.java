@@ -12,6 +12,21 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+
+/**
+ * Klasa WebSecurityConfig służy do konfiguracji Spring Security.
+ * W metodzie configure() użytkownik musi się zalogować, 
+ * aby zobaczyć stronę z widokiem.html ("users"), ("rooms"),("game_room"), ("question"). 
+ * W tej klasie konfigurowana jest również domyślną stronę logowania (generowana przez Spring Security)- formLogin(),
+ * z parametrem usernameParameter tj. email.
+ * Domyślnym adresem URL sukcesu logowania to ("rooms"),
+ * co oznacza, że ​​po udanym zalogowaniu użytkownik zostanie przekierowany na stronę z widokiem.html ("rooms").
+ * Zaś ​​po udanym wylogowaniu (.logoutSuccessUrl) użytkownik zostanie przekierowany na stronę z widokiem.html ("hoom"),
+ * z adresem URL "/".
+ * 
+* @author klasa konfiguracyjna generowana przez Springa modyfikacje wprowadziła Katarzyna Madalińska
+*/
  
 @Configuration
 @EnableWebSecurity

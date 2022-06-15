@@ -3,7 +3,7 @@ package pl.vabank.game.controllers;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import org.aspectj.weaver.patterns.TypePatternQuestions.Question;
+
 import org.javatuples.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -127,11 +127,8 @@ public class QuestionController {
     public String gameQuestion(@PathVariable Long rid, @PathVariable Long qid, Model model) {
 
         try {
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); // osoba która
-                                                                                                    // dochodzi
-            // do pokoju
-            Object currentPrincipalObject = authentication.getPrincipal();// currentPrincipalObject-pobiera aktualnego
-                                                                          // usera
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); // tworzenie currentUser przez Authentication
+            Object currentPrincipalObject = authentication.getPrincipal();
             UserData currentUser = ((CustomUserDetails) currentPrincipalObject).getUser();
 
             QuestionsData question = questRepo.getById(qid);// wybrane pytanie
@@ -146,18 +143,17 @@ public class QuestionController {
             if (room.getPlayer1().getId().equals(currentUser.getId())) {
 
 
-                int activQuestion = roomAPI.getValue0().get();// getter na roomie czyli wywołanie gettera na
-                                                              // currentQuestion
+                int activQuestion = roomAPI.getValue0().get();// getter na roomie czyli wywołanie gettera na currentQuestion
                 if (activQuestion == 2) {
-                    roomAPI.getValue1().accept(1);// wywłanie settera dla currentQuestion i zmiana warości z 2 na 1
+                    roomAPI.getValue1().accept(1);// wywołanie settera dla currentQuestion i zmiana warości z 2 na 1
                     roomRepo.saveAndFlush(room);// zapisanie do bazy 1(currentQuestion)
 
-                } // TODO:obsługa gdy activQuestion=0 lub 1
+                } // obsługa gdy activQuestion=0 lub 1
             } else if (room.getPlayer2().getId().equals(currentUser.getId())) {
 
                 int activQuestion = roomAPI.getValue0().get();
                 if (activQuestion == 1) {
-                    roomAPI.getValue1().accept(0);// wywłanie settera dla currentQuestion i zmiana warości z 1 na 0
+                    roomAPI.getValue1().accept(0);// wywołanie settera dla currentQuestion i zmiana warości z 1 na 0
                     roomRepo.saveAndFlush(room);// zapisanie do bazy 0(currentQuestion)
 
                 }

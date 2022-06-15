@@ -6,6 +6,21 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import pl.vabank.game.data.UserData;
+
+
+/**
+ * Aby zaimplementować funkcję uwierzytelniania (logowania), utworzono  
+ * klasę CustomUserDetails imlpementującą UserDetails (zdefiniowaną przez Spring Security) 
+ * reprezentującą użytkownika uwierzytelniającego. 
+ * Spring Security będzie wywoływał metody w tej klasie podczas procesu uwierzytelniania.
+ * Uwierzytelnianie (ang. authentication) – proces polegający na potwierdzeniu
+ * zadeklarowanej tożsamości podmiotu biorącego udział w procesie komunikacji. 
+ * Celem uwierzytelniania jest uzyskanie określonego poziomu pewności, 
+ * że dany podmiot jest w rzeczywistości tym, za który się podaje.
+
+
+* @author klasa konfiguracyjna generowana przez Springa
+*/
  
 public class CustomUserDetails implements UserDetails {
  

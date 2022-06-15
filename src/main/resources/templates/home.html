@@ -1,26 +1,88 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
+
 <head>
     <meta charset="ISO-8859-1">
     <title>Welcome to Java Vabank</title>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-    <style>
-        #b1{margin-top: 100px;
-        margin-bottom: 100px;
-        background-image: linear-gradient(to right, orange, yellow);
-        }
-        </style>
+
 </head>
-<body id="b1">
-    <div class="container text-center">
-        <h1>Welcome to Java Game</h1>
-        <h3><a th:href="@{/users}">List of Users</a></h3>
-        <h3><a th:href="@{/register}">Register</a></h3>
-        <h3><a th:href="@{/login}">Login</a></h3>
-        <h3><a th:href="@{/rooms}">List of Rooms</a></h3>
+<style>
+    body {
+        background-image: url("https://img.freepik.com/free-photo/blue-steam-black-background_172251-548.jpg?w=740");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+    #naglowek {
+        font-family: "Lucida Handwriting", "Brush Script MT", cursive;
+        font-weight: bold;
+        font-size: 36px;
+        color: white;
+        text-align: center;
+        padding-top: 15px;
+        padding-bottom: 10px;
+    }
+
+    table {
+        width: 750px;
+        text-align: center;
+        background-color: white;
+        border: 12px solid goldenrod;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .btn-primary {
+        background-color: grey !important;
+        width: 350px;
+        border-color: darkgray;
+        border-radius: 15px;
+        margin: 2px;
+    }
+</style>
+
+<body>
+    <p id="naglowek"> Java Vabank</p>
+    <div class="container text-center" align="center">
+        <table>
+            <tr style="background-color: rgb(94, 182, 197); color: white;">
+                <td colspan="2">
+                    <h2>Welcome to Java Game</h2>
+
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <img src="https://s3-eu-west-1.amazonaws.com/fs.siteor.com/javatech/files/layout/assan/vavatech/img/content/java-logo.png">
+                    <hr>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3><a th:href="@{/login}" class="btn btn-primary">Login</a></h3>
+                </td>
+                <td>
+                    <h3><a th:href="@{/register}" class="btn btn-primary">Register</a></h3>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <h3><a th:href="@{/users}" class="btn btn-primary">List of Users</a></h3>
+                </td>
+                <td>
+                    <h3><a th:href="@{/rooms}" class="btn btn-primary">List of Rooms</a></h3>
+                </td>
+            </tr>
+            <tr><td colspan="2">
+                <a th:href="@{/}" class="btn btn-primary">Zasady gry</a><br>
+            </td></tr>
+        </table>
     </div>
-     
 </body>
 </html>

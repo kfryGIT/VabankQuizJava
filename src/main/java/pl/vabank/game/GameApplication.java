@@ -6,12 +6,24 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+//import org.springframework.web.bind.annotation.GetMapping;
+//import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import pl.vabank.game.access.QuestionsRepository;
 import pl.vabank.game.data.QuestionsData;
+
+/**
+ * Klasa GameApplication to klasa konfiguracyjna, klasa główna, która będzie wykonywana 
+ * po uruchomieniu aplikacji.
+ * Adnotacja @SpringBootApplication włącza konfigurację ałtomatyczną SpringBoota oraz włącza skanowanie komponetów, 
+ * co pozwala na zadeklarowanie innych klas jako @Controller, @Entity itp.
+ * Metoda itializer jest opatrzona adnotacją @Bean, 
+ * gdy Spring "napotka" taką metodę, wykona ją i zarejestruje zwracaną wartość jako obiekt (ziarno) w kontenerze.
+ * Wtedy będzie można ten obiekt wstrzyknąć w innym miejscu korzystając np. z adnotacji @Autowired.
+ * 
+* @author Klasa konfiguracyjna, generowana przez Springa, modyfikacje wprowadziła Anna Mazela i Katarzyna Madalińska.
+*/
 
 @SpringBootApplication
 @RestController
@@ -21,10 +33,7 @@ public class GameApplication {
 		SpringApplication.run(GameApplication.class, args);
 	}
 
-	@GetMapping("/hello")
-	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
-		return String.format("Hello %s!", name);
-	}
+	
 
 	@Bean
 	public ApplicationRunner initializer(QuestionsRepository repository) {

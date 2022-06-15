@@ -7,6 +7,18 @@ import javax.persistence.Id;
 
 import javax.persistence.*;
 
+/**
+ * Klasa UserData ma adnotację @Entity co wskazuje, że jest to jednostka JPA, 
+ * ta jednostka jest mapowana do tabeli o nazwie user_data.
+ * Obiekt UserData ma 5 atrybutów (zmiennych): id, mail, password, firstName, lastName.
+ * Właściwość obiektu id jest opatrzona adnotacją @Id, dzięki czemu JPA rozpoznaje ją jako identyfikator obiektu. 
+ * Właściwość id jest również opatrzona adnotacją @GeneratedValue wskazującą, że identyfikator powinien być generowany automatycznie. 
+ * Pozostałe 4 właściwości  mail, password, firstName, lastName, z adnotacją @Column są mapowane na kolumny,
+ * które mają takie same nazwy jak same właściwości,
+ * W klasie utworzono gettery i settery dla pięciu atrybutów obieku UserData.
+
+*/
+
 @Entity // This tells Hibernate to make a table out of this class
 public class UserData {
   @Id

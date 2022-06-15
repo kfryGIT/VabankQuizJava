@@ -1,17 +1,19 @@
 package pl.vabank.game.data;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import javax.persistence.*;
 @Entity 
 public class QuestionsData {
-    
+
+   //konstruktor1 
     public QuestionsData() {
     }
 
+    //konstruktor2
     public QuestionsData(Long id, String questionText, String answer1Text, String answer2Text, String answer3Text,
             String answer4Text, String answerCorrect, String nameCategory, int priceCategory) {
         this.id = id;

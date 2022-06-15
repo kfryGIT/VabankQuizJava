@@ -1,56 +1,123 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="ISO-8859-1">
     <title>Sign Up</title>
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            background-image: url("https://img.freepik.com/free-photo/blue-steam-black-background_172251-548.jpg?w=740");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            font-family: 'Times New Roman', Times, serif;
+        }
+
+        #naglowek {
+            font-family: "Lucida Handwriting", "Brush Script MT", cursive;
+            font-weight: bold;
+            font-size: 36px;
+            color: white;
+            text-align: center;
+            padding-top: 15px;
+            padding-bottom: 10px;
+        }
+
+        table {
+            width: 725px;
+            background-color: white;
+            border: 12px solid goldenrod;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn-primary {
+            background-color: grey !important;
+            width: 200px;
+            border-color: darkgray;
+            border-radius: 15px !important;
+            margin: 3px;
+        }
+
+        h3 {
+            font-style: italic;
+            font-weight: bold;
+        }
+    </style>
 </head>
+
 <body>
+    <p id="naglowek"> Java Vabank</p>
     <div class="container text-center">
-        <div>
-            <h1>User Registration - Sign Up</h1>
-        </div>
-        <form th:action="@{/process_register}" th:object="${user}"
-            method="post" style="max-width: 600px; margin: 0 auto;">
-        <div class="m-3">
-            <div class="form-group row">
-                <label class="col-4 col-form-label">E-mail: </label>
-                <div class="col-8">
-                    <input type="email" th:field="*{email}" class="form-control" required />
+        <table>
+            <tr style="background-color: rgb(94, 182, 197); color: white;">
+                <th colspan="2">
+                    <div>
+                        <h3>User Registration - Sign Up</h3>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <form th:action="@{/process_register}" th:object="${user}" method="post"
+                        style="max-width: 600px; margin: 0 auto;">
+                        <div class="m-3">
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">E-mail: </label>
+                                <div class="col-8">
+                                    <input type="email" th:field="*{email}" class="form-control" required />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">Password: </label>
+                                <div class="col-8">
+                                    <input type="password" th:field="*{password}" class="form-control" required
+                                        minlength="6" maxlength="10" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">First Name: </label>
+                                <div class="col-8">
+                                    <input type="text" th:field="*{firstName}" class="form-control" required
+                                        minlength="2" maxlength="20" />
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">Last Name: </label>
+                                <div class="col-8">
+                                    <input type="text" th:field="*{lastName}" class="form-control" required
+                                        minlength="2" maxlength="20" />
+                                </div>
+                            </div>
+            <tr>
+                <td>
+                    <div>
+                        <button type="submit" class="btn btn-primary">Sign Up</button>
+                    </div>
+                </td>
+                <td>
+                <div>
+                    <a th:href="@{/}" class="btn btn-primary">Wróć do strony głównej.</a>
                 </div>
-            </div>
-             
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Password: </label>
-                <div class="col-8">
-                    <input type="password" th:field="*{password}" class="form-control"
-                            required minlength="6" maxlength="10"/>
-                </div>
-            </div>
-             
-            <div class="form-group row">
-                <label class="col-4 col-form-label">First Name: </label>
-                <div class="col-8">
-                    <input type="text" th:field="*{firstName}" class="form-control"
-                            required minlength="2" maxlength="20"/>
-                </div>
-            </div>
-             
-            <div class="form-group row">
-                <label class="col-4 col-form-label">Last Name: </label>
-                <div class="col-8">
-                    <input type="text" th:field="*{lastName}" class="form-control"
-                            required minlength="2" maxlength="20" />
-                </div>
-            </div>
-             
-            <div>
-                <button type="submit" class="btn btn-primary">Sign Up</button>
-            </div>
-        </div>
-        </form>
+            </td>
+            </tr>
+
+    </div>
+    </form>
+    </td>
+    </tr>
+
+    </table>
+
+
     </div>
 </body>
+
 </html>

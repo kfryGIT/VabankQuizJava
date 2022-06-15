@@ -1,12 +1,12 @@
 package pl.vabank.game.controllers;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Optional;
+//import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
+//import org.springframework.data.domain.Example;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -30,8 +30,7 @@ public class RoomController {
     @GetMapping("/game_room_finish/{id}")
     public String gameRoomFinish(@PathVariable("id") Long id, Model model) {
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); // osoba która dochodzi
-        // do pokoju
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); // tworzenie currentUser 
         Object currentPrincipalObject = authentication.getPrincipal();
         UserData currentUser = ((CustomUserDetails) currentPrincipalObject).getUser();
 
@@ -58,8 +57,8 @@ public class RoomController {
     @GetMapping("/game_room/{id}")
     public String gameRoom(@PathVariable("id") Long id, Model model) {
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); // osoba która dochodzi
-                                                                                                // do pokoju
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); // tworzenie currentUser
+                                                                                                
         Object currentPrincipalObject = authentication.getPrincipal();
         UserData currentUser = ((CustomUserDetails) currentPrincipalObject).getUser();
 
@@ -74,13 +73,13 @@ public class RoomController {
         if (room.getPlayer1() != null && room.getPlayer1().getId() == currentUser.getId()) {
             isValid = true;
 
-            model.addAttribute("currentPlayerPoints", room.getPlayer1Points());// wyświetl punkty
+            model.addAttribute("currentPlayerPoints", room.getPlayer1Points());// wyświetla punkty Player1
 
         }
 
         else if (room.getPlayer2() != null && room.getPlayer2().getId() == currentUser.getId()) {
             isValid = true;
-            model.addAttribute("currentPlayerPoints", room.getPlayer2Points());// wyświetl punkty
+            model.addAttribute("currentPlayerPoints", room.getPlayer2Points());// wyświetla punkty Player2
         }
 
         else if (room.getPlayer2() == null) {
@@ -143,13 +142,13 @@ public class RoomController {
     private void calcCacheActive(int index, Model model, UserData currentUser, RoomData room, int value)
             throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException,
             SecurityException {
-        // if(currentUser.getId().equals(room.getPlayer1().getId())){
+       
         if ((int) (room.getClass().getMethod("getActiveQuestion" + index).invoke(room)) == value) {
-            // if(room.getActiveQuestion1()==value){
+          
             model.addAttribute("cacheActive" + index, true);
         } else {
             model.addAttribute("cacheActive" + index, false);
         }
-        // }
+        
     }
 }

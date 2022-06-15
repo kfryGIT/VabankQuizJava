@@ -1,6 +1,6 @@
 package pl.vabank.game.controllers;
 
-import org.apache.logging.log4j.message.Message;
+//import org.apache.logging.log4j.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,8 +15,15 @@ import pl.vabank.game.data.QuestionsData;
 import pl.vabank.game.data.RoomData;
 import pl.vabank.game.data.UserData;
 /**
- * 
- * Opis klasu co tu sie dzieje 
+ * W klasie AnswerController z adnotacją @Controller obsługiwane są przychodzące żądania HTTP. 
+ * Po otrzymaniu żądania uruchamiana jest metoda answerQuestion, 
+ * na koniec metoda ta zwraca obiekt odpowiedzi http (w tym wypadku: wartość "answer" typu String).
+ * Wartość "answer" jest interpretowana jako logiczna nazwa widoku answer.html.
+ * Podsumowując klasa AnswerController obsługuje żadania użytkownika gry zwjązane z udzielaniem odpowiedzi na pytania. 
+ * Klasa wykorzystuje mechanizm wstrzykiwania zależności z użyciem adnotacji @Autowired, która m.in. umożliwia 
+ * pobieranie id pytania czy id pokoju przy użyciu metod get (getter). 
+
+
 * @author Katarzyna Madalińska
 */
 @Controller
@@ -30,23 +37,38 @@ public class AnswerController {
 
 
     /**
-     * Jeśli uczestinik odpowie poprawnie przkedayzwana jest mesasge w zaleznosci ... -komentarze
-     * @param rid
-     * @param qid
-     * @param aid
-     * @param model
-     * @return
+     * Adnotacja @GetMapping wskazuje na mapowanie żądań, które polega na tym, że dla danego żądania HTTP, 
+     * wybierana jest odpowiednia metoda Java (tj. answerQuestion) w celu obsługi tego żądania. 
+     * Czyli, jeśli użytkownik wysłał na serwer żądanie HTTP za pomocą metody HTTP GET oraz 
+     * zdefiniowaliśmy URL tego żądania, jako: "/answer/{rid}/{qid}/{aid}", to wówczas Spring przechwyci takie żądanie 
+     * i uruchomi metodę answerQuestion.
+     * 
+     * Metoda answerQuestion "analizuje" odpowiedź gracza/użytkownika na pytanie, 
+     * jeśli użytkownik prawidłowo odpowie na pytanie wyświetlana jest wiadomość "Odpowiedź poprawna",
+     * dodatkowo następuje sumowanie dotychczasowych punktów użytkownika z punktami za prawidłową odpowiedź
+     * oraz zapisywanie w bazie danych, powiększonej liczby punktów danego użytkownika.
+     * Natomiast jeśli użytkownik nieprawidłowo odpowie na pytanie wyświetlana jest wiadomość "Odpowiedź niepoprawna. " 
+     * + "Odpowiedź poprawna to:" oraz pobierana jest prawidłowa odpowiedź z bazy danych.
+     * Blok try catch(Exception e)- stanowi zabezpieczenie przed błędami, które mogą wystąpić.
+     * 
+     * @param rid -oznacza id pokoju 
+     * @param qid -oznacza id pytania
+     * @param aid -oznacza id odpowiedzi 
+     * (przy czym Adnotacja @PathVariable jest stosowana, gdy gracz wysyła żądanie ustawiając wartość parametru rid/qid/aid bezpośrednio w ścieżce)
+     * @param model -dot. import org.springframework.ui.Model i łączy kod java z html
+     * @return - wartość "answer"(String), która jest interpretowana jako logiczna nazwa widoku answer.html
      */
+    
     @GetMapping("/answer/{rid}/{qid}/{aid}")
     public String answerQuestion(@PathVariable Long rid, @PathVariable Long qid, @PathVariable Long aid, Model model) {
 
         QuestionsData question = null;
         try {
-            question = questRepo.getById(qid);
+            question = questRepo.getById(qid);//pobiera pytanie
 
             String answerText = null;
             if (aid == 1L)
-                answerText = question.getAnswer1Text();
+                answerText = question.getAnswer1Text();//pobiera tekst odpowiedzi -String
             else if (aid == 2L)
                 answerText = question.getAnswer2Text();
             else if (aid == 3L)
@@ -56,8 +78,8 @@ public class AnswerController {
 
             if (answerText != null && question.getAnswerCorrect().equals(answerText)) {
                 model.addAttribute("message", "Odpowiedź poprawna");
-                // liczenie punktów
-                Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); // osoba która
+               
+                Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); // osoba która odpowiada-currentUser
 
                 Object currentPrincipalObject = authentication.getPrincipal();// currentPrincipalObject-pobiera
 
@@ -70,9 +92,9 @@ public class AnswerController {
                     return "wrong_room";
                 }
                 if (room.getPlayer1() != null && room.getPlayer1().getId() == currentUser.getId()) {
-                   int newPoints= room.getPlayer1Points()+question.getPriceCategory();//pobiera aktualnych punktów usera i punktów za dane pytanie 
+                   int newPoints= room.getPlayer1Points()+question.getPriceCategory();//pobiera aktualne punkty usera1 i punkty za dane pytanie 
                    room.setPlayer1Points(newPoints);//aktualizacja punktów
-                   roomRepo.saveAndFlush(room);//zapsywanie punktów w bazie
+                   roomRepo.saveAndFlush(room);//zapisywanie punktów w bazie
                 }
 
                 else if (room.getPlayer2() != null && room.getPlayer2().getId() == currentUser.getId()) {
@@ -86,9 +108,10 @@ public class AnswerController {
             }
 
             model.addAttribute("roomid", rid);
-            model.addAttribute("questionid", qid);
+            // natomiast wiersz:  model.addAttribute("roomid", rid); -pozwala na przesłanie do widoku "answer" 
+            //odpowiedniego room id, do którego gracz ma wrócić po odpowiedzi na pytanie
 
-        } catch (Exception e) {//bląd logiczny w kodzie zabezpieczenie
+        } catch (Exception e) {//zabezpieczenie przed błędem w kodzie 
             return "redirect:question/" + rid.toString() + '/' + qid.toString();
         }
 
